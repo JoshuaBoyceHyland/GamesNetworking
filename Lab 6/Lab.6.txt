@@ -1,0 +1,10 @@
+Please read the following code, add your comments, run them.
+Submit the commented code, and screenshots of the running results.
+
+UDP: 
+http://www.binarytides.com/udp-socket-programming-in-winsock/
+
+TCP:
+https://msdn.microsoft.com/en-us/library/windows/desktop/ms737591(v=vs.85).aspx
+
+https://msdn.microsoft.com/en-us/library/windows/desktop/ms737593(v=vs.85).aspx

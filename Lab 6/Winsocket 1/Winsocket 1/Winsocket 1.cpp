@@ -37,7 +37,7 @@ int __cdecl main(int argc, char** argv)
 
     const char* sendbuf = "this is a test";// being sent to server
     char recvbuf[DEFAULT_BUFLEN]; // char buffer array
-    int iResult; // stores result of winsock functions, 
+    int iResult; // stores possible resulting errors of winsock functions, 
     int recvbuflen = DEFAULT_BUFLEN;
 
     // Validate the parameters

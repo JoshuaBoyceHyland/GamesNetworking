@@ -1,0 +1,4 @@
+﻿  main.cpp
+C:\Users\gameuser\Desktop\GamesNetworking\Lab 6\UDP\UDP client\main.cpp(29,17): warning C4244: '=': conversion from 'SOCKET' to 'int', possible loss of data
+C:\Users\gameuser\Desktop\GamesNetworking\Lab 6\UDP\UDP client\main.cpp(48,32): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  UDP client.vcxproj -> C:\Users\gameuser\Desktop\GamesNetworking\Lab 6\UDP\x64\Debug\UDP client.exe

@@ -1,9 +1,13 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\Simple UDP Server\\",
+  "WorkspaceRootPath": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{8FC73647-118E-49D8-A352-3D34BE781697}|Simple UDP Server\\Simple UDP Server.vcxproj|C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\Simple UDP Server\\Simple UDP Server\\Simple UDP Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "AbsoluteMoniker": "D:0:0:{7E5741AC-4A91-443D-9688-6E3A2F70A50D}|UDP client\\UDP client.vcxproj|C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\UDP client\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{7E5741AC-4A91-443D-9688-6E3A2F70A50D}|UDP client\\UDP client.vcxproj|solutionrelative:UDP client\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8FC73647-118E-49D8-A352-3D34BE781697}|Simple UDP Server\\Simple UDP Server.vcxproj|C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\Simple UDP Server\\Simple UDP Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{8FC73647-118E-49D8-A352-3D34BE781697}|Simple UDP Server\\Simple UDP Server.vcxproj|solutionrelative:Simple UDP Server\\Simple UDP Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
@@ -19,12 +23,46 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "main.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\UDP client\\main.cpp",
+              "RelativeDocumentMoniker": "UDP client\\main.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\UDP client\\main.cpp",
+              "RelativeToolTip": "UDP client\\main.cpp",
+              "ViewState": "AQIAADAAAAAAAAAAAAAwwEQAAABIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-05T16:01:00.118Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "54af362d-f861-4abc-a247-ef3b70f869a9",
+        "Display": 1,
+        "X": 110,
+        "Y": 30,
+        "Width": 1514,
+        "Height": 720,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Simple UDP Server.cpp",
-              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\Simple UDP Server\\Simple UDP Server\\Simple UDP Server.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\Simple UDP Server\\Simple UDP Server.cpp",
               "RelativeDocumentMoniker": "Simple UDP Server\\Simple UDP Server.cpp",
-              "ToolTip": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\Simple UDP Server\\Simple UDP Server\\Simple UDP Server.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\UDP\\Simple UDP Server\\Simple UDP Server.cpp",
               "RelativeToolTip": "Simple UDP Server\\Simple UDP Server.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAARAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAAADMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-22T15:14:46.489Z",
               "EditorCaption": ""

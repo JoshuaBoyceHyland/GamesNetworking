@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\TCP\\TCP server\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{983F62FE-F79B-469B-BBD6-850DD558AF1B}|Winsock 2\\Winsock 2.vcxproj|C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\TCP\\TCP server\\Winsock 2\\Winsock 2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{983F62FE-F79B-469B-BBD6-850DD558AF1B}|Winsock 2\\Winsock 2.vcxproj|solutionrelative:Winsock 2\\Winsock 2.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Winsock 2.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\TCP\\TCP server\\Winsock 2\\Winsock 2.cpp",
+              "RelativeDocumentMoniker": "Winsock 2\\Winsock 2.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\GamesNetworking\\Lab 6\\TCP\\TCP server\\Winsock 2\\Winsock 2.cpp",
+              "RelativeToolTip": "Winsock 2\\Winsock 2.cpp",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAADoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-11-05T16:11:01.266Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,32 +1,57 @@
 #include "Player.h"
 
+Player::Player()
+{
+	m_body.setPosition(m_position);
+	m_body.setFillColor(sf::Color::Yellow);
+	m_body.setRadius(50);
+	m_body.setOrigin({ 25, 25 });
+}
+
+Player::Player(Color t_playerColor)
+{
+	m_body.setPosition(m_position);
+	m_body.setFillColor(m_colorMap[t_playerColor]);
+	m_body.setRadius(50);
+	m_body.setOrigin({ 25, 25 });
+}
+
+void Player::updateWithPacket(UpdatePacket t_updatePacket)
+{
+	m_body.setPosition({ (float)t_updatePacket.x, (float)t_updatePacket.y });
+	m_body.setRotation({ t_updatePacket.rotation });
+}
+
 void Player::checkForInput(float deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		m_speed += 5;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		m_speed -= 5;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		m_rotation -= 1;
+		m_rotation -= 2.5;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_rotation += 1;
+		m_rotation += 2.5;
 	}
 
-	float radian = (m_rotation + 270.0f) * (3.14159265359f / 180.0f);
+	float radian = (m_rotation /*+ 270.0f*/) * (3.14159265359f / 180.0f);
 	m_velocity.x = std::cos(radian) * m_speed * (deltaTime / 1000);
 	m_velocity.y = std::sin(radian) * m_speed * (deltaTime / 1000);
 
 	m_position += m_velocity;
+	m_body.setPosition(m_position);
+	m_body.setRotation(m_rotation);
+
 	m_speed *= 0.99f;
 }
 

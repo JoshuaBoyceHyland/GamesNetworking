@@ -17,10 +17,15 @@
 /// load and setup thne image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
-	m_exitGame{false}
+	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Client" },
+	m_exitGame{ false },
+	m_client()
 {
-	circ.setFillColor(sf::Color::Red);
+	InitializePacket recievingPacket;
+	recv(m_client.m_server, (char*)&recievingPacket, sizeof(recievingPacket), 0);
+
+	m_player = Player((Color)recievingPacket.color);
+	circ.setFillColor(sf::Color::Yellow);
 	circ.setRadius(50);
 	circ.setPosition({ 500, 500 });
 }
@@ -78,10 +83,7 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
-		if ( sf::Event::MouseButtonReleased == newEvent.type)
-		{
-			processMouse(newEvent);
-		}
+
 	}
 }
 
@@ -98,12 +100,6 @@ void Game::processKeys(sf::Event t_event)
 	}
 }
 
-void Game::processMouse(sf::Event t_event)
-{
-
-
-}
-
 /// <summary>
 /// Update the game world
 /// </summary>
@@ -114,10 +110,20 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+	m_player.checkForInput(t_deltaTime.asMilliseconds());
 
-	Packet packet;
-	recv(m_client.m_server, (char*)&packet, sizeof(packet), 0);
-	circ.setPosition({ packet.x, packet.y });
+	UpdatePacket recievingPacket;
+	recv(m_client.m_server, (char*)&recievingPacket, sizeof(recievingPacket), 0);
+
+	circ.setPosition({ (float)recievingPacket.x,(float)recievingPacket.y });
+	circ.setRotation(recievingPacket.rotation);
+
+
+	UpdatePacket outGoingPacket = { m_player.m_position.x, m_player.m_position.y, m_player.m_rotation };
+	
+	send(m_client.m_server, (char*)&outGoingPacket, sizeof(outGoingPacket), 0);
+
+
 }
 
 /// <summary>
@@ -126,6 +132,7 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
+	m_player.draw(m_window);
 	m_window.draw(circ);
 	m_window.display();
 }

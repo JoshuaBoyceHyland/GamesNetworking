@@ -28,13 +28,10 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
-	void processMouse(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	void setupFontAndText();
-	void setupSprite();
-	void setupVertexArray();
+
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
@@ -45,7 +42,7 @@ private:
 
 	sf::CircleShape circ;
 
-
+	Player m_player;
 
 	Client m_client;
 	int index=  0;

@@ -17,12 +17,21 @@
 /// load and setup thne image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "SFML Game" },
+	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Host" },
 	m_exitGame{false}
 {
-	circ.setFillColor(sf::Color::Red);
-	circ.setRadius(50);
-	circ.setPosition({ 500, 500 });
+	Color color = Color::Red;
+
+	m_player = Player(color);
+
+	for (int i = 0; i < 1; i++)
+	{
+		color = Color(i + 1);
+		m_host.listenForClient();
+		m_clients.push_back(Player(color));
+		m_host.initializeClientColor(i, (int)color);
+	}
+
 }
 
 /// <summary>
@@ -78,10 +87,7 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
-		if ( sf::Event::MouseButtonReleased == newEvent.type)
-		{
-			processMouse(newEvent);
-		}
+
 	}
 }
 
@@ -97,31 +103,9 @@ void Game::processKeys(sf::Event t_event)
 		m_exitGame = true;
 	}
 
-	if (sf::Keyboard::W == t_event.key.code)
-	{
-		circ.move({ 0,-5 });
-	}
-	if (sf::Keyboard::S == t_event.key.code)
-	{
-		circ.move({ 0,5 });
-	}
-	if (sf::Keyboard::A == t_event.key.code)
-	{
-		circ.move({ -5,0 });
-	}
-	if (sf::Keyboard::D == t_event.key.code)
-	{
-		circ.move({ 5,0 });
-	}
-
 
 }
 
-void Game::processMouse(sf::Event t_event)
-{
-
-
-}
 
 /// <summary>
 /// Update the game world
@@ -133,12 +117,20 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
 	m_player.checkForInput(t_deltaTime.asMilliseconds());
 
+	m_host.updateClients(m_player.m_position.x, m_player.m_position.y, m_player.m_rotation);
 
-	Packet packet = { m_player.m_position.x, m_player.m_position.y };
+	std::vector<UpdatePacket> updatePackets = m_host.recieveClientData();
 
-	send(m_server.m_client, (char*)&packet, sizeof(packet), 0);
+	for (int i = 0; i < updatePackets.size(); i++)
+	{
+		m_clients[i].updateWithPacket(updatePackets[i]);
+	}
+
+	
+
 }
 
 /// <summary>
@@ -148,7 +140,11 @@ void Game::render()
 {
 	m_window.clear(sf::Color::Black);
 	m_player.draw(m_window);
-	m_window.draw(circ);
+	
+	for (int i = 0; i <m_clients.size(); i++)
+	{
+		m_clients[i].draw(m_window);
+	}
 	m_window.display();
 }
 

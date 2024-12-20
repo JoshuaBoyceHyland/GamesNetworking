@@ -9,12 +9,20 @@
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
 
+/// <summary>
+/// initialeColor
+/// </summary>
+struct InitializePacket
+{
+	int color;
+};
 
 
-struct Packet
+struct UpdatePacket
 {
 	float x;
 	float y;
+	float rotation;
 
 };
 

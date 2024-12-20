@@ -4,27 +4,42 @@ Player::Player()
 {
 	m_body.setPosition(m_position);
 	m_body.setFillColor(sf::Color::Yellow);
-	m_body.setSize({50, 50});
+	m_body.setRadius(50);
+	m_body.setOrigin({ 25, 25 });
+}
+
+Player::Player(Color t_playerColor)
+{
+	m_body.setPosition(m_position);
+	m_body.setFillColor(m_colorMap[t_playerColor]);
+	m_body.setRadius(50);
+	m_body.setOrigin({ 25, 25 });
+}
+
+void Player::updateWithPacket(UpdatePacket t_updatePacket)
+{
+	m_body.setPosition({ (float)t_updatePacket.x, (float)t_updatePacket.y });
+	m_body.setRotation({ t_updatePacket.rotation });
 }
 
 void Player::checkForInput(float deltaTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
 		m_speed += 5;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) )
 	{
 		m_speed -= 5;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) )
 	{
 		m_rotation -= 2.5;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D) )
 	{
 		m_rotation += 2.5;
 	}

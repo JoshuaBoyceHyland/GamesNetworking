@@ -29,26 +29,19 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
-	void processMouse(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
 	
-	void setupFontAndText();
-	void setupSprite();
-	void setupVertexArray();
 
 	sf::RenderWindow m_window; // main SFML window
-	sf::Font m_ArialBlackfont; // font used by message
-	sf::Text m_welcomeMessage; // text used for message on screen
-	sf::Texture m_logoTexture; // texture used for sfml logo
-	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
 
-	sf::CircleShape circ;
-
-	Host m_server;
+	Host m_host;
 	Player m_player;
-	int index=  0;
+
+	std::vector<Player> m_clients;
+
+
 };
 
 

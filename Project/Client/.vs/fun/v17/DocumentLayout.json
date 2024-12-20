@@ -1,0 +1,156 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\Player.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\MovementBehaviour.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\MovementBehaviour.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\NPC.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\RepeatedPathBehaviour.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\RepeatedPathBehaviour.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\RepeatedPathBehaviour.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{B8BCB7EC-F419-4C62-AA60-0B5A3787AF02}|fun\\fun.vcxproj|solutionrelative:fun\\RepeatedPathBehaviour.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Game.h",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Game.h",
+              "RelativeDocumentMoniker": "fun\\Game.h",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Game.h",
+              "RelativeToolTip": "fun\\Game.h",
+              "ViewState": "AQIAACQAAAAAAAAAAAAAAA0AAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-19T15:47:17.092Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Game.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Game.cpp",
+              "RelativeDocumentMoniker": "fun\\Game.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Game.cpp",
+              "RelativeToolTip": "fun\\Game.cpp",
+              "ViewState": "AQIAAG8AAAAAAAAAAAAAAH0AAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-19T15:47:12.555Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MovementBehaviour.h",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\MovementBehaviour.h",
+              "RelativeDocumentMoniker": "fun\\MovementBehaviour.h",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\MovementBehaviour.h",
+              "RelativeToolTip": "fun\\MovementBehaviour.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-19T15:28:12.737Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Player.h",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Player.h",
+              "RelativeDocumentMoniker": "fun\\Player.h",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Player.h",
+              "RelativeToolTip": "fun\\Player.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-19T15:27:23.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Player.cpp",
+              "RelativeDocumentMoniker": "fun\\Player.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\Player.cpp",
+              "RelativeToolTip": "fun\\Player.cpp",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAsAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-19T15:27:21.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RepeatedPathBehaviour.h",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\RepeatedPathBehaviour.h",
+              "RelativeDocumentMoniker": "fun\\RepeatedPathBehaviour.h",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\RepeatedPathBehaviour.h",
+              "RelativeToolTip": "fun\\RepeatedPathBehaviour.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-09-19T15:12:52.822Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NPC.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\NPC.cpp",
+              "RelativeDocumentMoniker": "fun\\NPC.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\NPC.cpp",
+              "RelativeToolTip": "fun\\NPC.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-17T09:52:43.06Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "RepeatedPathBehaviour.cpp",
+              "DocumentMoniker": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\RepeatedPathBehaviour.cpp",
+              "RelativeDocumentMoniker": "fun\\RepeatedPathBehaviour.cpp",
+              "ToolTip": "C:\\Users\\gameuser\\Desktop\\AIForGames\\Lab 1\\fun\\RepeatedPathBehaviour.cpp",
+              "RelativeToolTip": "fun\\RepeatedPathBehaviour.cpp",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABoAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-09-19T12:06:42.111Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

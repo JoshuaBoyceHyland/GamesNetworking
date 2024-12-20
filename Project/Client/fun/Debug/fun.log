@@ -1,0 +1,20 @@
+﻿  Game.cpp
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(70,12): error C2079: 'newEvent' uses undefined class 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(71,18): error C2664: 'bool sf::WindowBase::pollEvent(sf::Event &)': cannot convert argument 1 from 'int' to 'sf::Event &'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(73,19): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(73,19): error C2065: 'Closed': undeclared identifier
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(77,18): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(77,18): error C2065: 'KeyPressed': undeclared identifier
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(79,4): error C2664: 'void Game::processKeys(sf::Event)': cannot convert argument 1 from 'int' to 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(81,19): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(81,19): error C2065: 'MouseButtonReleased': undeclared identifier
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(83,4): error C2664: 'void Game::processMouse(sf::Event)': cannot convert argument 1 from 'int' to 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(93,12): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(101,12): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(104,10): error C2039: 'Mouse': is not a member of 'sf'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(104,10): error C3083: 'Mouse': the symbol to the left of a '::' must be a type
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(104,17): error C2039: 'Left': is not a member of 'sf'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(104,17): error C2065: 'Left': undeclared identifier
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(104,25): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(108,27): error C2027: use of undefined type 'sf::Event'
+C:\Users\gameuser\Documents\GitHub\MoreFun-withWinner\fun\fun\Game.cpp(109,27): error C2027: use of undefined type 'sf::Event'

@@ -42,10 +42,11 @@ private:
 
 	sf::CircleShape circ;
 
+	Client m_client;
 	Player m_player;
 
-	Client m_client;
-	int index=  0;
+	std::vector<Player> m_clients;
+	
 };
 
 

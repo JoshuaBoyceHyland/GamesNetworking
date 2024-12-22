@@ -20,17 +20,27 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Host" },
 	m_exitGame{false}
 {
+
+	std::vector<PlayerInitPacket> outGoingPackets;
+
+	// player 1 which is the host
 	Color color = Color::Red;
+	m_players.push_back(Player(color, m_spawnLocations[0]));
+	outGoingPackets.push_back({ 0, 0 });
 
-	m_player = Player(color);
-
-	for (int i = 0; i < 1; i++)
+	// rest of players which are clients
+	for (int i = 1; i < 2; i++)
 	{
-		color = Color(i + 1);
+		color = Color(i);
 		m_host.listenForClient();
-		m_clients.push_back(Player(color));
-		m_host.initializeClientColor(i, (int)color);
+		m_players.push_back(Player(color, m_spawnLocations[i]));
+		m_host.initializeClient({ i, 3 });
+		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y});
+		
 	}
+
+	m_host.initializeClientColor(outGoingPackets);
+	
 
 }
 
@@ -118,19 +128,23 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 
-	m_player.checkForInput(t_deltaTime.asMilliseconds());
+	m_players[0].checkForInput(t_deltaTime.asMilliseconds());
 
-	m_host.updateClients(m_player.m_position.x, m_player.m_position.y, m_player.m_rotation);
-
+	
 	std::vector<UpdatePacket> updatePackets = m_host.recieveClientData();
+
+	updatePackets.push_back({ 0, m_players[0].m_position.x, m_players[0].m_position.y, m_players[0].m_rotation, m_players[0].m_alive });
+	
+	updatePackets = checkForCollision(updatePackets);
 
 	for (int i = 0; i < updatePackets.size(); i++)
 	{
-		m_clients[i].updateWithPacket(updatePackets[i]);
+		m_players[updatePackets[i].player].updateWithPacket(updatePackets[i]);
 	}
 
-	
+	m_host.updateClients(updatePackets);
 
+	
 }
 
 /// <summary>
@@ -139,13 +153,43 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
-	m_player.draw(m_window);
-	
-	for (int i = 0; i <m_clients.size(); i++)
+	for (int i = 0; i <m_players.size(); i++)
 	{
-		m_clients[i].draw(m_window);
+		if (m_players[i].m_alive)
+		{
+			m_players[i].draw(m_window);
+		}
+		
 	}
 	m_window.display();
+}
+
+std::vector<UpdatePacket> Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
+{
+
+	for (int i = 0; i < m_players.size(); i++)
+	{
+
+		if (currentPlayer != i)
+		{
+			if (m_players[currentPlayer].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
+			{
+				m_players[i].m_alive = false;
+				
+				for (int k = 0; k < t_updatePackets.size(); k++)
+				{
+
+					if (t_updatePackets[k].player == i)
+					{
+						t_updatePackets[k].active = false;
+					}
+				}
+			}
+		}
+
+	}
+
+	return t_updatePackets;
 }
 
 

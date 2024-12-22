@@ -25,20 +25,34 @@ void Host::listenForClient()
 	closesocket(m_socket);
 }
 
-void Host::initializeClientColor(int t_clientIndex, int t_color)
+void Host::initializeClient(GameInitPacket t_outGoingPacket)
 {
-	InitializePacket outgoingPacket = { t_color };
-
-	send(m_clients[t_clientIndex], (char*)&outgoingPacket, sizeof(outgoingPacket), 0);
+	send(m_clients[t_outGoingPacket.yourPlayer - 1], (char*)&t_outGoingPacket, sizeof(t_outGoingPacket), 0);
 }
 
-void Host::updateClients(float t_x, float t_y, float t_rotation)
+void Host::initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets)
 {
-	UpdatePacket outGoingPacket = { t_x, t_y, t_rotation };
+	for (int i = 0; i < m_clients.size(); i++)
+	{
+		for (int k = 0; k < t_outGoingPackets.size(); k++)
+		{
+			send(m_clients[i], (char*)&t_outGoingPackets[k], sizeof(t_outGoingPackets[k]), 0);
+		}
+	}
+	
+}
+
+void Host::updateClients(std::vector<UpdatePacket> t_outGoingPackets)
+{
 
 	for (int i = 0; i < m_clients.size(); i++)
 	{
-		send(m_clients[i], (char*)&outGoingPacket, sizeof(outGoingPacket), 0);
+		// sending out all the packets
+		for (int k = 0; k < t_outGoingPackets.size(); k++)
+		{
+			send(m_clients[i], (char*)&t_outGoingPackets[k], sizeof(t_outGoingPackets[k]), 0);
+		}
+		
 	}
 }
 

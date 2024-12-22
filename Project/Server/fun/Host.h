@@ -9,13 +9,25 @@
 #pragma comment (lib, "Ws2_32.lib")
 
 #include <vector>
+#include <string>
+struct GameInitPacket
+{
+	int yourPlayer;
+	int numOfPlayers;
+
+	
+};
 
 /// <summary>
 /// initialeColor
 /// </summary>
-struct InitializePacket
+struct PlayerInitPacket
 {
+	int player;
 	int color;
+	float x;
+	float y;
+	
 };
 
 /// <summary>
@@ -23,9 +35,17 @@ struct InitializePacket
 /// </summary>
 struct UpdatePacket
 {
+	int player;
 	float x;
 	float y;
 	float rotation;
+	bool active;
+};
+
+struct CollisionPacket
+{
+	int player;
+	std::string popUpString;
 
 };
 
@@ -37,9 +57,11 @@ class Host
 
 		void listenForClient();
 
-		void initializeClientColor( int t_clientIndex, int t_color);
+		void initializeClient(GameInitPacket t_outGoingPacket);
 
-		void updateClients(float t_x, float t_y, float t_rotation);
+		void initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets);
+
+		void updateClients(std::vector<UpdatePacket> t_outGoingPackets);
 
 		std::vector<UpdatePacket> recieveClientData();
 

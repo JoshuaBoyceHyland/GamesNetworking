@@ -1,5 +1,6 @@
 ﻿  Game.cpp
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(121,51): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(131,55): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
+  Host.cpp
   Player.cpp
   main.cpp
 C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\main.cpp(33,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data

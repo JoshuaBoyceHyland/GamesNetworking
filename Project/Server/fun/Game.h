@@ -31,15 +31,19 @@ private:
 	void processKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
+
+	std::vector<UpdatePacket> checkForCollision(std::vector<UpdatePacket> t_updatePackets);
 	
 
 	sf::RenderWindow m_window; // main SFML window
 	bool m_exitGame; // control exiting game
 
 	Host m_host;
-	Player m_player;
 
-	std::vector<Player> m_clients;
+	int currentPlayer = 0;
+	std::vector<Player> m_players;
+
+	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500} };
 
 
 };

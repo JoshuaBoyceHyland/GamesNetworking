@@ -8,7 +8,7 @@ Player::Player()
 	m_body.setOrigin({ 25, 25 });
 }
 
-Player::Player(Color t_playerColor)
+Player::Player(Color t_playerColor, sf::Vector2f t_spawnLocation) : m_position( t_spawnLocation)
 {
 	m_body.setPosition(m_position);
 	m_body.setFillColor(m_colorMap[t_playerColor]);
@@ -20,6 +20,7 @@ void Player::updateWithPacket(UpdatePacket t_updatePacket)
 {
 	m_body.setPosition({ (float)t_updatePacket.x, (float)t_updatePacket.y });
 	m_body.setRotation({ t_updatePacket.rotation });
+	m_alive = t_updatePacket.active;
 }
 
 void Player::checkForInput(float deltaTime)
@@ -51,7 +52,7 @@ void Player::checkForInput(float deltaTime)
 	m_position += m_velocity;
 	m_body.setPosition(m_position);
 	m_body.setRotation(m_rotation);
-
+	
 	m_speed *= 0.99f;
 }
 

@@ -21,13 +21,38 @@ Game::Game() :
 	m_exitGame{ false },
 	m_client()
 {
-	InitializePacket recievingPacket;
-	recv(m_client.m_server, (char*)&recievingPacket, sizeof(recievingPacket), 0);
 
-	m_player = Player((Color)recievingPacket.color);
-	circ.setFillColor(sf::Color::Yellow);
-	circ.setRadius(50);
-	circ.setPosition({ 500, 500 });
+	GameInitPacket initPacket;
+	PlayerInitPacket colorPacket;
+
+
+	// recieving info about the clients and which player we aree
+	while (true)
+	{
+		if (-1 != recv(m_client.m_server, (char*)&initPacket, sizeof(initPacket), 0))
+		{
+			currentPlayer = initPacket.yourPlayer;
+			std::cout << "THere are " << initPacket.numOfPlayers << " Players and I am " << initPacket.yourPlayer << std::endl;
+			break;
+		}
+	}
+	
+	// recievinh information about other players
+	for (int i = 0; i < 2; i++)
+	{
+		while (true)
+		{
+			if (-1 != recv(m_client.m_server, (char*)&colorPacket, sizeof(colorPacket), 0))
+			{
+
+				m_players.push_back( Player( (Color)colorPacket.color, { colorPacket.x, colorPacket.y }));
+
+				std::cout << "Player " << colorPacket.player<< " Color " << colorPacket.color << std::endl;
+				break;
+			}
+		}
+	}
+
 }
 
 /// <summary>
@@ -110,19 +135,13 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-	m_player.checkForInput(t_deltaTime.asMilliseconds());
-
-	UpdatePacket recievingPacket;
-	recv(m_client.m_server, (char*)&recievingPacket, sizeof(recievingPacket), 0);
-
-	circ.setPosition({ (float)recievingPacket.x,(float)recievingPacket.y });
-	circ.setRotation(recievingPacket.rotation);
-
-
-	UpdatePacket outGoingPacket = { m_player.m_position.x, m_player.m_position.y, m_player.m_rotation };
 	
-	send(m_client.m_server, (char*)&outGoingPacket, sizeof(outGoingPacket), 0);
+	m_players[currentPlayer].checkForInput(t_deltaTime.asMilliseconds());
 
+
+
+	updateHost();
+	updatePlayers();
 
 }
 
@@ -132,9 +151,41 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
-	m_player.draw(m_window);
-	m_window.draw(circ);
+	for (int i = 0; i < m_players.size(); i++)
+	{
+		if (m_players[i].m_alive)
+		{
+			m_players[i].draw(m_window);
+		}
+	}
 	m_window.display();
+}
+
+void Game::updateHost()
+{
+	UpdatePacket outGoingPacket = { currentPlayer, m_players[currentPlayer].m_position.x, m_players[currentPlayer].m_position.y, m_players[currentPlayer].m_rotation, m_players[currentPlayer].m_alive };
+
+	send(m_client.m_server, (char*)&outGoingPacket, sizeof(outGoingPacket), 0);
+}
+
+void Game::updatePlayers()
+{
+	UpdatePacket recievingPacket;
+
+	// recievinh information about other players
+	for (int i = 0; i < 2; i++)
+	{
+		while (true)
+		{
+			if (-1 != recv(m_client.m_server, (char*)&recievingPacket, sizeof(recievingPacket), 0))
+			{
+
+				m_players[recievingPacket.player].updateWithPacket(recievingPacket);
+		
+				break;
+			}
+		}
+	}
 }
 
 

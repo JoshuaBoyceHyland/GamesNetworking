@@ -8,7 +8,7 @@ class Player
 {
 public:
 	Player();
-	Player(Color t_playerColor);
+	Player(Color t_playerColor, sf::Vector2f t_spawnLocation);
 	void updateWithPacket(UpdatePacket t_updatePacket);
 
 	void checkForInput(float deltaTime);
@@ -20,6 +20,8 @@ public:
 	sf::Vector2f m_position = { 0, 0 };
 
 	sf::CircleShape m_body;
+
+	bool m_alive = true;
 private:
 
 

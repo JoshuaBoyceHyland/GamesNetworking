@@ -1,4 +1,7 @@
 ﻿  Game.cpp
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(133,55): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(184,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(137,55): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(188,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+  main.cpp
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\main.cpp(34,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
   fun.vcxproj -> C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\x64\Debug\fun.exe

@@ -30,16 +30,20 @@ Game::Game() :
 	m_players.push_back(Player(color, m_spawnLocations[0]));
 	outGoingPackets.push_back({ 0, 0 });
 
+
+	listen(m_host.m_socket, SOMAXCONN);
+	
 	// rest of players which are clients
-	for (int i = 1; i < 2; i++)
+	for (int i = 1; i < 3; i++)
 	{
 		color = Color(i);
 		m_host.listenForClient();
 		m_players.push_back(Player(color, m_spawnLocations[i]));
-		m_host.initializeClient({ i, 3 });
+		m_host.initializeClient( i - 1, { i, 3 });
 		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y});
 		
 	}
+
 
 	m_host.initializeClientColor(outGoingPackets);
 	

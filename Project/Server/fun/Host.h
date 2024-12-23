@@ -14,8 +14,6 @@ struct GameInitPacket
 {
 	int yourPlayer;
 	int numOfPlayers;
-
-	
 };
 
 /// <summary>
@@ -61,7 +59,7 @@ class Host
 
 		void listenForClient();
 
-		void initializeClient(GameInitPacket t_outGoingPacket);
+		void initializeClient(int clientIndex, GameInitPacket t_outGoingPacket);
 
 		void initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets);
 
@@ -72,10 +70,10 @@ class Host
 		std::vector<UpdatePacket> recieveClientData();
 
 		std::vector<SOCKET> m_clients;
-
+		SOCKET m_socket;
 	private:
 		WSADATA wsData;
-		SOCKET m_socket;
+		
 		sockaddr_in m_hint;
 
 		const int PORT = 54000;

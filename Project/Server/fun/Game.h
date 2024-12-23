@@ -43,7 +43,7 @@ private:
 	int currentPlayer = 0;
 	std::vector<Player> m_players;
 
-	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500} };
+	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500}, { 400, 400} };
 
 	/// <summary>
 	/// Keep track of total time the game has been going on

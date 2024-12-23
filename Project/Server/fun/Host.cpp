@@ -18,16 +18,16 @@ Host::Host()
 
 void Host::listenForClient()
 {
-	listen(m_socket, SOMAXCONN);
+	//listen(m_socket, SOMAXCONN);
 
 	m_clients.emplace_back( accept(m_socket, nullptr, nullptr) );
 
-	closesocket(m_socket);
+	//closesocket(m_socket);
 }
 
-void Host::initializeClient(GameInitPacket t_outGoingPacket)
+void Host::initializeClient(int clientIndex, GameInitPacket t_outGoingPacket)
 {
-	send(m_clients[t_outGoingPacket.yourPlayer - 1], (char*)&t_outGoingPacket, sizeof(t_outGoingPacket), 0);
+	send(m_clients[clientIndex], (char*)&t_outGoingPacket, sizeof(t_outGoingPacket), 0);
 }
 
 void Host::initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets)

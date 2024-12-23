@@ -39,7 +39,7 @@ Game::Game() :
 	}
 	
 	// recievinh information about other players
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		while (true)
 		{
@@ -53,6 +53,9 @@ Game::Game() :
 			}
 		}
 	}
+
+
+
 
 }
 
@@ -142,7 +145,7 @@ void Game::update(sf::Time t_deltaTime)
 
 	updateHost();
 	updatePlayers();
-
+	m_gameText.update();
 }
 
 /// <summary>

@@ -149,10 +149,10 @@ void Game::update(sf::Time t_deltaTime)
 	
 	std::vector<UpdatePacket> updatePackets = createUpdatePacketsForClients();
 
-	updatePackets = checkForCollision(updatePackets);
+	
 
 	m_host.updateClients(updatePackets);
-
+	checkForCollision(updatePackets);
 	
 }
 
@@ -189,9 +189,9 @@ std::vector<UpdatePacket> Game::createUpdatePacketsForClients()
 	return updatePackets;
 }
 
-std::vector<UpdatePacket> Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
+void Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
 {
-
+	CollisionPacket possibleCollision;
 	for (int i = 0; i < m_players.size(); i++)
 	{
 
@@ -209,14 +209,10 @@ std::vector<UpdatePacket> Game::checkForCollision(std::vector<UpdatePacket> t_up
 					m_text.makeText(str, 5);
 
 
-					for (int k = 0; k < t_updatePackets.size(); k++)
-					{
-						t_updatePackets[k].possibleCollision.wasCollision = true;
-
-						t_updatePackets[k].possibleCollision.popUpTTL = TTL;
-						t_updatePackets[k].possibleCollision.player = i;
-						t_updatePackets[k].possibleCollision.playerLifeSpan = timeLived;
-					}
+					possibleCollision.player = i;
+					possibleCollision.playerLifeSpan = timeLived;
+					possibleCollision.popUpTTL = TTL;
+					possibleCollision.wasCollision = true;
 				
 
 				}
@@ -226,7 +222,9 @@ std::vector<UpdatePacket> Game::checkForCollision(std::vector<UpdatePacket> t_up
 
 	}
 
-	return t_updatePackets;
+	
+	
+	m_host.notifyClientsOfCollision(possibleCollision);
 }
 
 

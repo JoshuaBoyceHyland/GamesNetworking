@@ -33,7 +33,7 @@ private:
 	void render();
 
 	std::vector<UpdatePacket> createUpdatePacketsForClients();
-	std::vector<UpdatePacket> checkForCollision(std::vector<UpdatePacket> t_updatePackets);
+	void checkForCollision(std::vector<UpdatePacket> t_updatePackets);
 	
 
 	sf::RenderWindow m_window; // main SFML window

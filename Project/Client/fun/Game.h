@@ -44,7 +44,7 @@ private:
 	int currentPlayer;
 	std::vector<Player> m_players;
 	GameText m_gameText;
-	
+	int numOfPlayers;
 };
 
 

@@ -33,6 +33,7 @@ Game::Game() :
 		if (-1 != recv(m_client.m_server, (char*)&initPacket, sizeof(initPacket), 0))
 		{
 			currentPlayer = initPacket.yourPlayer;
+			numOfPlayers = initPacket.numOfPlayers;
 			std::cout << "THere are " << initPacket.numOfPlayers << " Players and I am " << initPacket.yourPlayer << std::endl;
 			break;
 		}
@@ -170,10 +171,11 @@ void Game::render()
 
 void Game::updatePlayers()
 {
+	CollisionPacket possibleCollision;
 	UpdatePacket recievingPacket;
 
 	//// recievinh information about other players
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < numOfPlayers; i++)
 	{
 		while (true)
 		{
@@ -187,11 +189,15 @@ void Game::updatePlayers()
 		}
 	}
 
-	if (recievingPacket.possibleCollision.wasCollision)
+	if (-1 != recv(m_client.m_server, (char*)&possibleCollision, sizeof(possibleCollision), 0))
 	{
-		m_players[recievingPacket.possibleCollision.player].m_alive = false;
-		std::string str = "Player: " + std::to_string(recievingPacket.possibleCollision.player) + " lasted: " + std::to_string(recievingPacket.possibleCollision.playerLifeSpan) + " seconds";
-		m_gameText.makeText(str, recievingPacket.possibleCollision.popUpTTL);
+		if (possibleCollision.wasCollision)
+		{
+			m_players[possibleCollision.player].m_alive = false;
+			std::string str = "Player: " + std::to_string(possibleCollision.player) + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
+			m_gameText.makeText(str, possibleCollision.popUpTTL);
+		}
+
 	}
 
 	

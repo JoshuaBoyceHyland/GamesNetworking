@@ -45,8 +45,8 @@ struct UpdatePacket
 	int player;
 	float x;
 	float y;
-	float rotation;
-	CollisionPacket possibleCollision;
+
+//	CollisionPacket possibleCollision;
 };
 
 struct InputPacket

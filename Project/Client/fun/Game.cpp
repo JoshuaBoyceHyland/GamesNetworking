@@ -19,7 +19,8 @@
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Client" },
 	m_exitGame{ false },
-	m_client()
+	m_client(), 
+	m_gameText( {100, 100})
 {
 
 	GameInitPacket initPacket;
@@ -139,7 +140,6 @@ void Game::update(sf::Time t_deltaTime)
 	m_players[currentPlayer].checkForInput(t_deltaTime.asMilliseconds());
 
 
-
 	updateHost();
 	updatePlayers();
 
@@ -158,6 +158,7 @@ void Game::render()
 			m_players[i].draw(m_window);
 		}
 	}
+	m_gameText.draw(m_window);
 	m_window.display();
 }
 
@@ -171,6 +172,7 @@ void Game::updateHost()
 void Game::updatePlayers()
 {
 	UpdatePacket recievingPacket;
+
 
 	// recievinh information about other players
 	for (int i = 0; i < 2; i++)
@@ -186,6 +188,15 @@ void Game::updatePlayers()
 			}
 		}
 	}
+
+	if (recievingPacket.possibleCollision.wasCollision)
+	{
+		m_players[recievingPacket.possibleCollision.player].m_alive = false;
+		std::string str = "Player: " + std::to_string(recievingPacket.possibleCollision.player) + " lasted: " + std::to_string(recievingPacket.possibleCollision.playerLifeSpan) + " seconds";
+		m_gameText.makeText(str, recievingPacket.possibleCollision.popUpTTL);
+	}
+
+	
 }
 
 

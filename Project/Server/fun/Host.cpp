@@ -56,6 +56,14 @@ void Host::updateClients(std::vector<UpdatePacket> t_outGoingPackets)
 	}
 }
 
+void Host::notifyClientsOfCollision(CollisionPacket t_outGoingPacket)
+{
+	for (int i = 0; i < m_clients.size(); i++)
+	{
+		send(m_clients[i], (char*)&t_outGoingPacket, sizeof(t_outGoingPacket), 0);
+	}
+}
+
 std::vector<UpdatePacket> Host::recieveClientData()
 {
 	UpdatePacket currentPacket;

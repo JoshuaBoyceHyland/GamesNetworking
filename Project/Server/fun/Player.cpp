@@ -20,7 +20,6 @@ void Player::updateWithPacket(UpdatePacket t_updatePacket)
 {
 	m_body.setPosition({ (float)t_updatePacket.x, (float)t_updatePacket.y });
 	m_body.setRotation({ t_updatePacket.rotation });
-	m_alive = t_updatePacket.active;
 }
 
 void Player::checkForInput(float deltaTime)

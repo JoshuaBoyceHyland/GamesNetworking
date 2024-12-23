@@ -3,7 +3,7 @@
 GameText::GameText(sf::Vector2f t_position)
 {
 
-	if (!m_font.loadFromFile("ASSETS/FONTS/font.tff"))
+	if (!m_font.loadFromFile("ASSETS/FONTS/font.ttf"))
 	{
 		std::cout << "couldnt load font" << std::endl;
 	}
@@ -32,6 +32,7 @@ void GameText::makeText(std::string t_string, float t_timeToLive)
 	m_timer.restart();
 	m_text.setString(t_string);
 	m_active = true;
+	m_timeToLive = t_timeToLive;
 }
 
 void GameText::draw(sf::RenderWindow& t_window)

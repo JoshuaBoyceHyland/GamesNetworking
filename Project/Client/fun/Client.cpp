@@ -11,6 +11,8 @@ Client::Client()
 	m_hint.sin_port = htons(PORT);
 	m_hint.sin_addr.S_un.S_addr = inet_addr("127.0.0.1");
 
+
+
 	connect(m_server, (sockaddr*)&m_hint, sizeof(m_hint));
 
 

@@ -30,6 +30,15 @@ struct PlayerInitPacket
 	
 };
 
+struct CollisionPacket
+{
+	bool wasCollision = false;
+	int player;
+	int playerLifeSpan;
+	float popUpTTL;
+
+};
+
 /// <summary>
 /// Packet for updating players throught the game
 /// </summary>
@@ -39,15 +48,10 @@ struct UpdatePacket
 	float x;
 	float y;
 	float rotation;
-	bool active;
+	CollisionPacket possibleCollision;
 };
 
-struct CollisionPacket
-{
-	int player;
-	std::string popUpString;
 
-};
 
 class Host
 {
@@ -62,6 +66,8 @@ class Host
 		void initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets);
 
 		void updateClients(std::vector<UpdatePacket> t_outGoingPackets);
+
+		void notifyClientsOfCollision(CollisionPacket t_outGoingPacket);
 
 		std::vector<UpdatePacket> recieveClientData();
 

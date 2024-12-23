@@ -13,7 +13,7 @@
 
 #include "Client.h"
 #include "Player.h"
-
+#include "GameText.h"
 class Game
 {
 public:
@@ -43,6 +43,7 @@ private:
 
 	int currentPlayer;
 	std::vector<Player> m_players;
+	GameText m_gameText;
 	
 };
 

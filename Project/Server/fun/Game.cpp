@@ -18,12 +18,14 @@
 /// </summary>
 Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Host" },
-	m_exitGame{false}
+	m_exitGame{false}, 
+	m_text({100, 100})
 {
 
 	std::vector<PlayerInitPacket> outGoingPackets;
 
 	// player 1 which is the host
+
 	Color color = Color::Red;
 	m_players.push_back(Player(color, m_spawnLocations[0]));
 	outGoingPackets.push_back({ 0, 0 });
@@ -127,13 +129,13 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-
+	m_text.update();
 	m_players[0].checkForInput(t_deltaTime.asMilliseconds());
 
 	
 	std::vector<UpdatePacket> updatePackets = m_host.recieveClientData();
 
-	updatePackets.push_back({ 0, m_players[0].m_position.x, m_players[0].m_position.y, m_players[0].m_rotation, m_players[0].m_alive });
+	updatePackets.push_back({ 0, m_players[0].m_position.x, m_players[0].m_position.y, m_players[0].m_rotation });
 	
 	updatePackets = checkForCollision(updatePackets);
 
@@ -161,6 +163,7 @@ void Game::render()
 		}
 		
 	}
+	m_text.draw(m_window);
 	m_window.display();
 }
 
@@ -172,19 +175,31 @@ std::vector<UpdatePacket> Game::checkForCollision(std::vector<UpdatePacket> t_up
 
 		if (currentPlayer != i)
 		{
-			if (m_players[currentPlayer].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
+			if (m_players[i].m_alive)
 			{
-				m_players[i].m_alive = false;
-				
-				for (int k = 0; k < t_updatePackets.size(); k++)
+				if (m_players[currentPlayer].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
 				{
+					
+					m_players[i].m_alive = false;
+					int timeLived = m_timer.getElapsedTime().asSeconds();
+					std::string str = "Player: " + std::to_string(i) + " lasted: " + std::to_string(timeLived) + " seconds";
+					float TTL = 5;
+					m_text.makeText(str, 5);
 
-					if (t_updatePackets[k].player == i)
+
+					for (int k = 0; k < t_updatePackets.size(); k++)
 					{
-						t_updatePackets[k].active = false;
+						t_updatePackets[k].possibleCollision.wasCollision = true;
+
+						t_updatePackets[k].possibleCollision.popUpTTL = TTL;
+						t_updatePackets[k].possibleCollision.player = i;
+						t_updatePackets[k].possibleCollision.playerLifeSpan = timeLived;
 					}
+				
+
 				}
 			}
+			
 		}
 
 	}

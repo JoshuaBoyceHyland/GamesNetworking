@@ -13,7 +13,7 @@
 
 #include "Host.h"
 #include "Player.h"
-
+#include "GameText.h"
 
 class Game
 {
@@ -45,7 +45,15 @@ private:
 
 	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500} };
 
+	/// <summary>
+	/// Keep track of total time the game has been going on
+	/// </summary>
+	sf::Clock m_timer;
 
+	/// <summary>
+	/// Text for game
+	/// </summary>
+	GameText m_text;
 };
 
 

@@ -8,7 +8,7 @@
 
 // Need to link with Ws2_32.lib
 #pragma comment (lib, "Ws2_32.lib")
-
+#include<string>
 struct GameInitPacket
 {
 	int yourPlayer;
@@ -28,6 +28,14 @@ struct PlayerInitPacket
 	float y;
 };
 
+struct CollisionPacket
+{
+	bool wasCollision = false;
+	int player;
+	int playerLifeSpan;
+	float popUpTTL;
+
+};
 
 struct UpdatePacket
 {
@@ -35,9 +43,11 @@ struct UpdatePacket
 	float x;
 	float y;
 	float rotation;
-	bool active;
+	CollisionPacket possibleCollision;
 
 };
+
+
 
 class Client
 {

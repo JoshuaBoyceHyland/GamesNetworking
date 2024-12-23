@@ -1,0 +1,8 @@
+﻿  Game.cpp
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.h(12,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  GameText.cpp
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\GameText.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  main.cpp
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.h(12,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory
+  Player.cpp
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Player.h(2,10): fatal  error C1083: Cannot open include file: 'SFML/Graphics.hpp': No such file or directory

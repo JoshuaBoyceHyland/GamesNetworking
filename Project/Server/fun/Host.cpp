@@ -18,11 +18,11 @@ Host::Host()
 
 void Host::listenForClient()
 {
-	//listen(m_socket, SOMAXCONN);
+	listen(m_socket, SOMAXCONN);
 
 	m_clients.emplace_back( accept(m_socket, nullptr, nullptr) );
 
-	//closesocket(m_socket);
+	
 }
 
 void Host::initializeClient(int clientIndex, GameInitPacket t_outGoingPacket)

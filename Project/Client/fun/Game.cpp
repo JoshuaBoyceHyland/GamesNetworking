@@ -20,39 +20,29 @@ Game::Game() :
 	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Client" },
 	m_exitGame{ false },
 	m_client(), 
-	m_gameText( {100, 100})
+	m_gameText( {25, 10})
 {
 
-	GameInitPacket initPacket;
-	PlayerInitPacket colorPacket;
-
+	GameInitPacket initPacket = m_client.recieveGameInitialisation();
 
 	// recieving info about the clients and which player we aree
-	while (true)
-	{
-		if (-1 != recv(m_client.m_server, (char*)&initPacket, sizeof(initPacket), 0))
-		{
-			currentPlayer = initPacket.yourPlayer;
-			numOfPlayers = initPacket.numOfPlayers;
-			std::cout << "THere are " << initPacket.numOfPlayers << " Players and I am " << initPacket.yourPlayer << std::endl;
-			break;
-		}
-	}
+	currentPlayer = initPacket.yourPlayer;
+	numOfPlayers = initPacket.numOfPlayers;
+
 	
+	
+
+	PlayerInitPacket playerInitPacket;
 	// recievinh information about other players
 	for (int i = 0; i < initPacket.numOfPlayers; i++)
 	{
-		while (true)
-		{
-			if (-1 != recv(m_client.m_server, (char*)&colorPacket, sizeof(colorPacket), 0))
-			{
+		
+		playerInitPacket = m_client.recievePlayerInitialization();
 
-				m_players.push_back( Player( (Color)colorPacket.color, { colorPacket.x, colorPacket.y }));
+		m_players.push_back( Player( (Color)playerInitPacket.color, { playerInitPacket.x, playerInitPacket.y }));
 
-				std::cout << "Player " << colorPacket.player<< " Color " << colorPacket.color << std::endl;
-				break;
-			}
-		}
+		std::cout << "Player " << playerInitPacket.player<< " Color " << playerInitPacket.color << std::endl;
+				
 	}
 
 
@@ -141,12 +131,9 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 	
-	
 	sf::Vector2 direction = m_players[currentPlayer].checkForInput(t_deltaTime.asMilliseconds());
 
-	InputPacket inputPacket = { currentPlayer, direction.x, direction.y };
-
-	send(m_client.m_server, (char*)&inputPacket, sizeof(inputPacket), 0);
+	m_client.sendClientInput(currentPlayer, direction.x, direction.y);
 
 	updatePlayers();
 	m_gameText.update();
@@ -171,33 +158,25 @@ void Game::render()
 
 void Game::updatePlayers()
 {
-	CollisionPacket possibleCollision;
+	
 	UpdatePacket recievingPacket;
 
 	//// recievinh information about other players
 	for (int i = 0; i < numOfPlayers; i++)
 	{
-		while (true)
-		{
-			if (-1 != recv(m_client.m_server, (char*)&recievingPacket, sizeof(recievingPacket), 0))
-			{
+		recievingPacket = m_client.recievePlayerUpdate();
 
-				m_players[recievingPacket.player].updateWithPacket(recievingPacket);
+		m_players[recievingPacket.player].updateWithPacket(recievingPacket);
 		
-				break;
-			}
-		}
 	}
 
-	if (-1 != recv(m_client.m_server, (char*)&possibleCollision, sizeof(possibleCollision), 0))
-	{
-		if (possibleCollision.wasCollision)
-		{
-			m_players[possibleCollision.player].m_alive = false;
-			std::string str = "Player: " + std::to_string(possibleCollision.player) + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
-			m_gameText.makeText(str, possibleCollision.popUpTTL);
-		}
+	CollisionPacket possibleCollision = m_client.recievePossibleCollisionEvent();
 
+	if (possibleCollision.wasCollision)
+	{
+		m_players[possibleCollision.player].m_alive = false;
+		std::string str = m_players[possibleCollision.player].m_color + " Player" + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
+		m_gameText.makeText(str, possibleCollision.popUpTTL);
 	}
 
 	

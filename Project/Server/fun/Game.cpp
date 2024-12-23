@@ -17,37 +17,12 @@
 /// load and setup thne image
 /// </summary>
 Game::Game() :
-	m_window{ sf::VideoMode{ 800U, 600U, 32U }, "Host" },
+	m_window{ sf::VideoMode{ Globals::SCREEN_WIDTH, Globals::SCREEN_HEIGHT, 32U }, "Host" },
 	m_exitGame{false}, 
-	m_text({100, 100})
+	m_text({25, 10})
 {
-
-	std::vector<PlayerInitPacket> outGoingPackets;
-
-	// player 1 which is the host
-
-	Color color = Color::Red;
-	m_players.push_back(Player(color, m_spawnLocations[0]));
-	outGoingPackets.push_back({ 0, 0 });
-
-
-	listen(m_host.m_socket, SOMAXCONN);
 	
-	// rest of players which are clients
-	for (int i = 1; i < 3; i++)
-	{
-		color = Color(i);
-		m_host.listenForClient();
-		m_players.push_back(Player(color, m_spawnLocations[i]));
-		m_host.initializeClient(i - 1, { i, 3 });
-		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y});
-		
-	}
-
-
-	m_host.initializeClientColor(outGoingPackets);
-	
-
+	findPlayers();
 }
 
 /// <summary>
@@ -133,23 +108,21 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
+
 	m_text.update();
+
 	m_players[0].checkForInput(t_deltaTime.asMilliseconds());
 
-	
 	std::vector<InputPacket> inputPackets = m_host.recieveClientData();
 
 	inputPackets.push_back({ 0, m_players[0].m_velocity.x, m_players[0].m_velocity.y });
-	
+
 	for (int i = 0; i < inputPackets.size(); i++)
 	{
 		m_players[inputPackets[i].player].updateWithPacket(inputPackets[i]);
 	}
 
-	
 	std::vector<UpdatePacket> updatePackets = createUpdatePacketsForClients();
-
-	
 
 	m_host.updateClients(updatePackets);
 	checkForCollision(updatePackets);
@@ -162,16 +135,69 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::Black);
+
 	for (int i = 0; i <m_players.size(); i++)
 	{
-		if (m_players[i].m_alive)
+		if (m_players[i].m_active)
 		{
 			m_players[i].draw(m_window);
 		}
 		
 	}
 	m_text.draw(m_window);
+
+
 	m_window.display();
+}
+
+void Game::findPlayers()
+{
+	std::vector<PlayerInitPacket> outGoingPackets;
+
+	// player 1 which is the host
+	Color color = Color::Red;
+	m_players.push_back(Player(color, m_spawnLocations[0]));
+	outGoingPackets.push_back({ 0, 0 });
+
+
+
+
+	// rest of players which are clients
+	for (int i = 1; i < 3; i++)
+	{
+		color = Color(i);
+		m_host.listenForClient();
+		m_players.push_back(Player(color, m_spawnLocations[i]));
+		m_host.initializeClient(i - 1, { i, 3 });
+		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y });
+
+	}
+
+
+	m_host.initializeClientColor(outGoingPackets);
+
+	m_timer.restart();
+}
+
+void Game::gameLoop(float t_deltaTime)
+{
+	m_text.update();
+
+	m_players[0].checkForInput(t_deltaTime);
+
+	std::vector<InputPacket> inputPackets = m_host.recieveClientData();
+
+	inputPackets.push_back({ 0, m_players[0].m_velocity.x, m_players[0].m_velocity.y });
+
+	for (int i = 0; i < inputPackets.size(); i++)
+	{
+		m_players[inputPackets[i].player].updateWithPacket(inputPackets[i]);
+	}
+
+	std::vector<UpdatePacket> updatePackets = createUpdatePacketsForClients();
+
+	m_host.updateClients(updatePackets);
+	checkForCollision(updatePackets);
 }
 
 std::vector<UpdatePacket> Game::createUpdatePacketsForClients()
@@ -195,16 +221,16 @@ void Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
 	for (int i = 0; i < m_players.size(); i++)
 	{
 
-		if (currentPlayer != i)
+		if (m_currentPlayer != i)
 		{
-			if (m_players[i].m_alive)
+			if (m_players[i].m_active)
 			{
-				if (m_players[currentPlayer].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
+				if (m_players[m_currentPlayer].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
 				{
 					
-					m_players[i].m_alive = false;
+					m_players[i].m_active = false;
 					int timeLived = m_timer.getElapsedTime().asSeconds();
-					std::string str = "Player: " + std::to_string(i) + " lasted: " + std::to_string(timeLived) + " seconds";
+					std::string str = m_players[i].m_color + " Player " + " lasted: " + std::to_string(timeLived) + " seconds";
 					float TTL = 5;
 					m_text.makeText(str, 5);
 

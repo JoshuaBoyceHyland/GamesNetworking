@@ -35,6 +35,11 @@ void GameText::makeText(std::string t_string, float t_timeToLive)
 	m_timeToLive = t_timeToLive;
 }
 
+void GameText::disableText()
+{
+	m_active = false;
+}
+
 void GameText::draw(sf::RenderWindow& t_window)
 {
 	if (m_active)

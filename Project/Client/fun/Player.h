@@ -22,10 +22,12 @@ public:
 	sf::CircleShape m_body;
 
 	bool m_alive = true;
+	std::string m_color;
 private:
 
 
 	std::map<Color, sf::Color> m_colorMap = { {Color::Red, sf::Color::Red}, {Color::Blue, sf::Color::Blue}, {Color::Green, sf::Color::Green},{Color::Yellow, sf::Color::Yellow} };
+	std::map<Color, std::string> m_colorStringMap = { {Color::Red, "Red" }, {Color::Blue, "Blue"}, {Color::Green, "Green"},{Color::Yellow, "Yellow"} };
 	float m_speed = 1;
 	sf::Vector2f m_velocity = { 0, 0 };
 

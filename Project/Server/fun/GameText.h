@@ -7,8 +7,13 @@ class GameText
 
 	public:
 		GameText(sf::Vector2f t_position);
+
 		void update();
+
 		void makeText(std::string t_string, float t_timeToLive);
+
+		void disableText();
+
 		void draw(sf::RenderWindow& t_window);
 
 	private:

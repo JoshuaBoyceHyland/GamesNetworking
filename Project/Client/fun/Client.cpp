@@ -17,3 +17,75 @@ Client::Client()
 
 
 }
+
+GameInitPacket Client::recieveGameInitialisation()
+{
+	bool dataRecieved = false;
+	GameInitPacket initPacket;
+
+	while (!dataRecieved)
+	{
+		if (-1 != recv(m_server, (char*)&initPacket, sizeof(initPacket), 0))
+		{
+			dataRecieved = true;
+		}
+	}
+
+
+	return initPacket;
+}
+
+PlayerInitPacket Client::recievePlayerInitialization()
+{
+	bool dataRecieved = false;
+	PlayerInitPacket playerInitPacket;
+
+	while (!dataRecieved)
+	{
+		if (-1 != recv(m_server, (char*)&playerInitPacket, sizeof(playerInitPacket), 0))
+		{
+			dataRecieved = true;
+		}
+	}
+
+	return playerInitPacket;
+}
+
+void Client::sendClientInput(int playerIndex, float t_xDirection, float t_yDirection)
+{
+	InputPacket inputPacket = { playerIndex, t_xDirection, t_yDirection };
+
+	send( m_server, (char*)&inputPacket, sizeof(inputPacket), 0);
+
+}
+
+UpdatePacket Client::recievePlayerUpdate()
+{
+	bool dataRecieved = false;
+	UpdatePacket playerUpdatePacket;
+	
+	
+	if (-1 != recv(m_server, (char*)&playerUpdatePacket, sizeof(playerUpdatePacket), 0))
+	{
+		dataRecieved = true;
+	}
+
+
+	return playerUpdatePacket;
+}
+
+CollisionPacket Client::recievePossibleCollisionEvent()
+{
+	bool dataRecieved = false;
+	CollisionPacket possibleCollision;
+
+
+	
+	if (-1 != recv(m_server, (char*)&possibleCollision, sizeof(possibleCollision), 0))
+	{
+		dataRecieved = true;
+	}
+	
+
+	return possibleCollision;
+}

@@ -14,6 +14,9 @@
 #include "Host.h"
 #include "Player.h"
 #include "GameText.h"
+#include "Globals.h"
+
+enum class GameState{ LoadingScreen, SearchingForPlayers, Gameplay};
 
 class Game
 {
@@ -32,6 +35,9 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 
+	void findPlayers();
+	void gameLoop(float t_deltaTime);
+
 	std::vector<UpdatePacket> createUpdatePacketsForClients();
 	void checkForCollision(std::vector<UpdatePacket> t_updatePackets);
 	
@@ -41,7 +47,10 @@ private:
 
 	Host m_host;
 
-	int currentPlayer = 0;
+	int m_chaser;
+
+	int m_currentPlayer = 0;
+
 	std::vector<Player> m_players;
 
 	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500}, { 400, 400} };
@@ -55,6 +64,8 @@ private:
 	/// Text for game
 	/// </summary>
 	GameText m_text;
+
+	GameState m_currentState = GameState::SearchingForPlayers;
 };
 
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Host.h"
-
+#include "Globals.h"
 enum class Color{ Red = 0, Blue = 1, Green = 2, Yellow = 3};
 
 class Player
@@ -22,12 +22,16 @@ public:
 	sf::CircleShape m_body;
 	sf::Vector2f m_velocity = { 0, 0 };
 
-	bool m_alive = true;
+	bool m_active = true;
+
+	std::string m_color;
 private:
 
 	void boundsCheck();
 
 	std::map<Color, sf::Color> m_colorMap = { {Color::Red, sf::Color::Red}, {Color::Blue, sf::Color::Blue}, {Color::Green, sf::Color::Green},{Color::Yellow, sf::Color::Yellow} };
+	std::map<Color, std::string> m_colorStringMap = { {Color::Red, "Red" }, {Color::Blue, "Blue"}, {Color::Green, "Green"},{Color::Yellow, "Yellow"} };
+	
 	float m_speed = 1;
 	
 };

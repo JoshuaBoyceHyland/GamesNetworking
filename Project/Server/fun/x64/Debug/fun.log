@@ -1,4 +1,4 @@
 ﻿  Game.cpp
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(137,55): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(206,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(115,55): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\fun\Game.cpp(233,20): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
   fun.vcxproj -> C:\Users\Joshua\Desktop\GamesNetworking\Project\Server\x64\Debug\fun.exe

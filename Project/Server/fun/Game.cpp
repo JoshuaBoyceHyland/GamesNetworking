@@ -21,8 +21,11 @@ Game::Game() :
 	m_exitGame{false}, 
 	m_text({25, 10})
 {
-	
+
+	m_chaser = rand() % 3;
+
 	findPlayers();
+	m_text.makeText(m_players[m_chaser].m_color + " Player is the chaser", 10);
 }
 
 /// <summary>
@@ -108,14 +111,14 @@ void Game::update(sf::Time t_deltaTime)
 	{
 		m_window.close();
 	}
-
+	
 	m_text.update();
 
-	m_players[0].checkForInput(t_deltaTime.asMilliseconds());
+	m_players[m_hostPlayer].checkForInput(t_deltaTime.asMilliseconds());
 
 	std::vector<InputPacket> inputPackets = m_host.recieveClientData();
 
-	inputPackets.push_back({ 0, m_players[0].m_velocity.x, m_players[0].m_velocity.y });
+	inputPackets.push_back({ m_hostPlayer, m_players[m_hostPlayer].m_velocity.x, m_players[m_hostPlayer].m_velocity.y });
 
 	for (int i = 0; i < inputPackets.size(); i++)
 	{
@@ -125,8 +128,10 @@ void Game::update(sf::Time t_deltaTime)
 	std::vector<UpdatePacket> updatePackets = createUpdatePacketsForClients();
 
 	m_host.updateClients(updatePackets);
+
 	checkForCollision(updatePackets);
-	
+
+
 }
 
 /// <summary>
@@ -160,44 +165,21 @@ void Game::findPlayers()
 	outGoingPackets.push_back({ 0, 0 });
 
 
-
-
 	// rest of players which are clients
 	for (int i = 1; i < 3; i++)
 	{
 		color = Color(i);
 		m_host.listenForClient();
 		m_players.push_back(Player(color, m_spawnLocations[i]));
-		m_host.initializeClient(i - 1, { i, 3 });
+		m_host.initializeClient(i - 1, { i, 3, m_chaser });
 		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y });
 
 	}
 
 
-	m_host.initializeClientColor(outGoingPackets);
+	m_host.initializeClientsPlayers(outGoingPackets);
 
 	m_timer.restart();
-}
-
-void Game::gameLoop(float t_deltaTime)
-{
-	m_text.update();
-
-	m_players[0].checkForInput(t_deltaTime);
-
-	std::vector<InputPacket> inputPackets = m_host.recieveClientData();
-
-	inputPackets.push_back({ 0, m_players[0].m_velocity.x, m_players[0].m_velocity.y });
-
-	for (int i = 0; i < inputPackets.size(); i++)
-	{
-		m_players[inputPackets[i].player].updateWithPacket(inputPackets[i]);
-	}
-
-	std::vector<UpdatePacket> updatePackets = createUpdatePacketsForClients();
-
-	m_host.updateClients(updatePackets);
-	checkForCollision(updatePackets);
 }
 
 std::vector<UpdatePacket> Game::createUpdatePacketsForClients()
@@ -221,11 +203,11 @@ void Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
 	for (int i = 0; i < m_players.size(); i++)
 	{
 
-		if (m_currentPlayer != i)
+		if (m_chaser != i)
 		{
 			if (m_players[i].m_active)
 			{
-				if (m_players[m_currentPlayer].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
+				if (m_players[m_chaser].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
 				{
 					
 					m_players[i].m_active = false;
@@ -248,8 +230,6 @@ void Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
 
 	}
 
-	
-	
 	m_host.notifyClientsOfCollision(possibleCollision);
 }
 

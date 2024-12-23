@@ -17,6 +17,7 @@ struct GameInitPacket
 {
 	int yourPlayer;
 	int numOfPlayers;
+	int chaser;
 };
 
 /// <summary>
@@ -63,24 +64,46 @@ struct UpdatePacket
 
 };
 
-enum class TransmitionStatus { Error = -1, Disconnect, Transmitted  };
 class Client
 {
 	public:
 		Client();
-		SOCKET m_server;
-
+		
+		/// <summary>
+		/// Recieves the Game initizialation packet
+		/// </summary>
+		/// <returns></returns>
 		GameInitPacket recieveGameInitialisation();
 
+		/// <summary>
+		/// Recieves the players initizialation packet
+		/// </summary>
+		/// <returns></returns>
 		PlayerInitPacket recievePlayerInitialization();
 
+		/// <summary>
+		/// Sends the client the input from the client player
+		/// </summary>
+		/// <param name="playerIndex"></param>
+		/// <param name="t_xDirection"></param>
+		/// <param name="t_yDirection"></param>
 		void sendClientInput(int playerIndex, float t_xDirection, float t_yDirection);
 
+		/// <summary>
+		/// Recieves the update packet for a player
+		/// </summary>
+		/// <returns></returns>
 		UpdatePacket recievePlayerUpdate();
 
+		/// <summary>
+		/// Recieves the a possible collision evemt
+		/// </summary>
+		/// <returns></returns>
 		CollisionPacket recievePossibleCollisionEvent();
 
 	private:
+
+		SOCKET m_server;
 		WSADATA wsData;
 		sockaddr_in m_hint;
 		const int PORT = 54000;

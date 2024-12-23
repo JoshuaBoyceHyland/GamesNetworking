@@ -16,7 +16,6 @@
 #include "GameText.h"
 #include "Globals.h"
 
-enum class GameState{ LoadingScreen, SearchingForPlayers, Gameplay};
 
 class Game
 {
@@ -35,25 +34,51 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 
+	/// <summary>
+	/// Sets up game with players
+	/// </summary>
 	void findPlayers();
-	void gameLoop(float t_deltaTime);
 
+	/// <summary>
+	/// gathers player data to be sent to clietns
+	/// </summary>
+	/// <returns>List of packets to be sent out</returns>
 	std::vector<UpdatePacket> createUpdatePacketsForClients();
+
+	/// <summary>
+	/// Checks data for collision, sends out packet to say whether there was or wasnt a collision
+	/// </summary>
+	/// <param name="t_updatePackets"></param>
 	void checkForCollision(std::vector<UpdatePacket> t_updatePackets);
 	
 
 	sf::RenderWindow m_window; // main SFML window
 	bool m_exitGame; // control exiting game
 
+	/// <summary>
+	/// Host networking
+	/// </summary>
 	Host m_host;
 
+	/// <summary>
+	/// Player who is the chaser
+	/// </summary>
 	int m_chaser;
 
-	int m_currentPlayer = 0;
+	/// <summary>
+	/// The player who is the host
+	/// </summary>
+	int m_hostPlayer = 0;
 
+	/// <summary>
+	/// List of all players
+	/// </summary>
 	std::vector<Player> m_players;
 
-	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500}, { 400, 400} };
+	/// <summary>
+	/// Spawn locations
+	/// </summary>
+	std::vector<sf::Vector2f> m_spawnLocations = { {0, 0}, {700, 500}, { 700, 0} };
 
 	/// <summary>
 	/// Keep track of total time the game has been going on
@@ -65,7 +90,7 @@ private:
 	/// </summary>
 	GameText m_text;
 
-	GameState m_currentState = GameState::SearchingForPlayers;
+
 };
 
 

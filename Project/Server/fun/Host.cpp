@@ -30,7 +30,7 @@ void Host::initializeClient(int clientIndex, GameInitPacket t_outGoingPacket)
 	send(m_clients[clientIndex], (char*)&t_outGoingPacket, sizeof(t_outGoingPacket), 0);
 }
 
-void Host::initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets)
+void Host::initializeClientsPlayers(std::vector<PlayerInitPacket> t_outGoingPackets)
 {
 	for (int i = 0; i < m_clients.size(); i++)
 	{

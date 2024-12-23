@@ -79,8 +79,6 @@ CollisionPacket Client::recievePossibleCollisionEvent()
 	bool dataRecieved = false;
 	CollisionPacket possibleCollision;
 
-
-	
 	if (-1 != recv(m_server, (char*)&possibleCollision, sizeof(possibleCollision), 0))
 	{
 		dataRecieved = true;

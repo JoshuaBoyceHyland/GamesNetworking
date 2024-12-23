@@ -23,13 +23,12 @@ Game::Game() :
 	m_gameText( {25, 10})
 {
 
+
 	GameInitPacket initPacket = m_client.recieveGameInitialisation();
 
 	// recieving info about the clients and which player we aree
 	currentPlayer = initPacket.yourPlayer;
 	numOfPlayers = initPacket.numOfPlayers;
-
-	
 	
 
 	PlayerInitPacket playerInitPacket;
@@ -45,8 +44,8 @@ Game::Game() :
 				
 	}
 
-
-
+	m_gameText.makeText(m_players[initPacket.chaser].m_color + " Player is the chaser", 10);
+	
 
 }
 
@@ -147,7 +146,7 @@ void Game::render()
 	m_window.clear(sf::Color::Black);
 	for (int i = 0; i < m_players.size(); i++)
 	{
-		if (m_players[i].m_alive)
+		if (m_players[i].m_active)
 		{
 			m_players[i].draw(m_window);
 		}
@@ -174,7 +173,7 @@ void Game::updatePlayers()
 
 	if (possibleCollision.wasCollision)
 	{
-		m_players[possibleCollision.player].m_alive = false;
+		m_players[possibleCollision.player].m_active = false;
 		std::string str = m_players[possibleCollision.player].m_color + " Player" + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
 		m_gameText.makeText(str, possibleCollision.popUpTTL);
 	}

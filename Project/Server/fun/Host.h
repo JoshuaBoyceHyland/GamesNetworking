@@ -10,14 +10,19 @@
 
 #include <vector>
 #include <string>
+
+/// <summary>
+/// Packet to initialise the game, number of players and also which player the client is
+/// </summary>
 struct GameInitPacket
 {
 	int yourPlayer;
 	int numOfPlayers;
+	int chaser;
 };
 
 /// <summary>
-/// initialeColor
+/// initializes all the players color and start position
 /// </summary>
 struct PlayerInitPacket
 {
@@ -28,6 +33,9 @@ struct PlayerInitPacket
 	
 };
 
+/// <summary>
+/// Packet to let clients know if there is a collision, who collided with the chaser and also how long they lasted with out being caught
+/// </summary>
 struct CollisionPacket
 {
 	bool wasCollision = false;
@@ -46,9 +54,11 @@ struct UpdatePacket
 	float x;
 	float y;
 
-//	CollisionPacket possibleCollision;
 };
 
+/// <summary>
+/// Packet client sends to host to let them know their input
+/// </summary>
 struct InputPacket
 {
 	int player;
@@ -63,21 +73,53 @@ class Host
 		Host();
 		SOCKET m_client;
 
+		/// <summary>
+		/// Listen for client
+		/// </summary>
 		void listenForClient();
 
+		/// <summary>
+		/// Sent client the game initilization packet
+		/// </summary>
+		/// <param name="clientIndex"> The index of the client which is offset by 1</param>
+		/// <param name="t_outGoingPacket">Game initilization packet</param>
 		void initializeClient(int clientIndex, GameInitPacket t_outGoingPacket);
 
-		void initializeClientColor(std::vector<PlayerInitPacket> t_outGoingPackets);
+		/// <summary>
+		/// Initializes the players in every clients game with a color and position
+		/// </summary>
+		/// <param name="t_outGoingPackets">Intiialition packet</param>
+		void initializeClientsPlayers(std::vector<PlayerInitPacket> t_outGoingPackets);
 
+		/// <summary>
+		/// This updates the clients with the position of players 
+		/// </summary>
+		/// <param name="t_outGoingPackets">Updating packet</param>
 		void updateClients(std::vector<UpdatePacket> t_outGoingPackets);
 
+		/// <summary>
+		/// THis notifies clients of a collision event and whether it happened or not
+		/// </summary>
+		/// <param name="t_outGoingPacket">Collision packet</param>
 		void notifyClientsOfCollision(CollisionPacket t_outGoingPacket);
 
+		/// <summary>
+		/// This function listends for clients inputs
+		/// </summary>
+		/// <returns> A vector of all the clients inptus</returns>
 		std::vector<InputPacket> recieveClientData();
 
+		/// <summary>
+		/// Vector of clients
+		/// </summary>
 		std::vector<SOCKET> m_clients;
+
+		/// <summary>
+		/// Our socket
+		/// </summary>
 		SOCKET m_socket;
 	private:
+
 		WSADATA wsData;
 		
 		sockaddr_in m_hint;

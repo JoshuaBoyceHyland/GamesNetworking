@@ -28,26 +28,49 @@ void Player::updateWithPacket(InputPacket t_updatePacket)
 	m_body.setPosition(m_position);
 }
 
+void Player::checkForSpeedPowerUp()
+{
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		if (!m_powerUpUsed)
+		{
+			m_speed *= 2;
+			m_powerUpActive = true;
+			m_powerUpUsed = true;
+			m_powerUpTimer.restart();
+		}
+	}
+
+	if (m_powerUpTimer.getElapsedTime().asSeconds() > m_powerUpDuration && m_powerUpActive)
+	{
+		m_speed /= 2;
+		m_powerUpActive = false;
+	}
+}
+
 void Player::checkForInput(float deltaTime)
 {
+	checkForSpeedPowerUp();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		m_velocity.y = -2.5;
+		m_velocity.y = -m_speed;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		m_velocity.y = 2.5;
+		m_velocity.y = m_speed;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		m_velocity.x = -2.5;
+		m_velocity.x = -m_speed;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		m_velocity.x = 2.5;
+		m_velocity.x = m_speed;
 	}
 
 	m_velocity *= 0.99f;

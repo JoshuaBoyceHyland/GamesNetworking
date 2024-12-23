@@ -1,0 +1,7 @@
+﻿  Game.cpp
+  GameplayScene.cpp
+  main.cpp
+C:\Users\Joshua\Desktop\GamesNetworking\Project\Tag\fun\main.cpp(34,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  SceneManager.cpp
+  Generating Code...
+  fun.vcxproj -> C:\Users\Joshua\Desktop\GamesNetworking\Project\Tag\x64\Debug\fun.exe

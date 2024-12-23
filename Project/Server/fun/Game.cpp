@@ -39,7 +39,7 @@ Game::Game() :
 		color = Color(i);
 		m_host.listenForClient();
 		m_players.push_back(Player(color, m_spawnLocations[i]));
-		m_host.initializeClient( i - 1, { i, 3 });
+		m_host.initializeClient(i - 1, { i, 3 });
 		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y});
 		
 	}
@@ -137,16 +137,19 @@ void Game::update(sf::Time t_deltaTime)
 	m_players[0].checkForInput(t_deltaTime.asMilliseconds());
 
 	
-	std::vector<UpdatePacket> updatePackets = m_host.recieveClientData();
+	std::vector<InputPacket> inputPackets = m_host.recieveClientData();
 
-	updatePackets.push_back({ 0, m_players[0].m_position.x, m_players[0].m_position.y, m_players[0].m_rotation });
+	inputPackets.push_back({ 0, m_players[0].m_velocity.x, m_players[0].m_velocity.y });
 	
-	updatePackets = checkForCollision(updatePackets);
-
-	for (int i = 0; i < updatePackets.size(); i++)
+	for (int i = 0; i < inputPackets.size(); i++)
 	{
-		m_players[updatePackets[i].player].updateWithPacket(updatePackets[i]);
+		m_players[inputPackets[i].player].updateWithPacket(inputPackets[i]);
 	}
+
+	
+	std::vector<UpdatePacket> updatePackets = createUpdatePacketsForClients();
+
+	updatePackets = checkForCollision(updatePackets);
 
 	m_host.updateClients(updatePackets);
 
@@ -169,6 +172,21 @@ void Game::render()
 	}
 	m_text.draw(m_window);
 	m_window.display();
+}
+
+std::vector<UpdatePacket> Game::createUpdatePacketsForClients()
+{
+	UpdatePacket current;
+	std::vector<UpdatePacket> updatePackets;
+	for (int i = 0; i < m_players.size(); i++)
+	{
+		current.player = i;
+		current.x = m_players[i].m_position.x;
+		current.y = m_players[i].m_position.y;
+
+		updatePackets.push_back(current);
+	}
+	return updatePackets;
 }
 
 std::vector<UpdatePacket> Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)

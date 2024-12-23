@@ -49,6 +49,12 @@ struct UpdatePacket
 	CollisionPacket possibleCollision;
 };
 
+struct InputPacket
+{
+	int player;
+	float xDirection;
+	float yDirection;
+};
 
 
 class Host
@@ -67,7 +73,7 @@ class Host
 
 		void notifyClientsOfCollision(CollisionPacket t_outGoingPacket);
 
-		std::vector<UpdatePacket> recieveClientData();
+		std::vector<InputPacket> recieveClientData();
 
 		std::vector<SOCKET> m_clients;
 		SOCKET m_socket;

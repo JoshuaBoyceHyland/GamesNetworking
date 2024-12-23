@@ -32,6 +32,7 @@ private:
 	void update(sf::Time t_deltaTime);
 	void render();
 
+	std::vector<UpdatePacket> createUpdatePacketsForClients();
 	std::vector<UpdatePacket> checkForCollision(std::vector<UpdatePacket> t_updatePackets);
 	
 

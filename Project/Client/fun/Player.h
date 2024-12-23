@@ -11,7 +11,7 @@ public:
 	Player(Color t_playerColor, sf::Vector2f t_spawnLocation);
 	void updateWithPacket(UpdatePacket t_updatePacket);
 
-	void checkForInput(float deltaTime);
+	sf::Vector2f checkForInput(float deltaTime);
 
 	void draw(sf::RenderWindow& t_window);
 
@@ -27,7 +27,7 @@ private:
 
 	std::map<Color, sf::Color> m_colorMap = { {Color::Red, sf::Color::Red}, {Color::Blue, sf::Color::Blue}, {Color::Green, sf::Color::Green},{Color::Yellow, sf::Color::Yellow} };
 	float m_speed = 1;
-	sf::Vector2f m_velocity;
+	sf::Vector2f m_velocity = { 0, 0 };
 
 };
 

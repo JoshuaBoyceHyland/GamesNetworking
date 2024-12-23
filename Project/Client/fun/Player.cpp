@@ -18,41 +18,39 @@ Player::Player(Color t_playerColor, sf::Vector2f t_spawnLocation) : m_position( 
 
 void Player::updateWithPacket(UpdatePacket t_updatePacket)
 {
-	m_body.setPosition({ (float)t_updatePacket.x, (float)t_updatePacket.y });
-	m_body.setRotation({ t_updatePacket.rotation });
+	m_body.setPosition({ t_updatePacket.x, t_updatePacket.y });
 }
 
-void Player::checkForInput(float deltaTime)
+sf::Vector2f Player::checkForInput(float deltaTime)
 {
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		m_speed += 5;
+		m_position.y -= 2.5;
+		m_velocity.y = -2.5;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		m_speed -= 5;
+		m_position.y += 2.5;
+		m_velocity.y = 2.5;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		m_rotation -= 2.5;
+		m_position.x -= 2.5;
+		m_velocity.x = -2.5;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		m_rotation += 2.5;
+		m_position.x += 2.5;
+		m_velocity.x = 2.5;
 	}
+	m_velocity *= 0.99f;
+	//m_body.setPosition(m_position);
 
-	float radian = (m_rotation /*+ 270.0f*/) * (3.14159265359f / 180.0f);
-	m_velocity.x = std::cos(radian) * m_speed * (deltaTime / 1000);
-	m_velocity.y = std::sin(radian) * m_speed * (deltaTime / 1000);
-
-	m_position += m_velocity;
-	m_body.setPosition(m_position);
-	m_body.setRotation(m_rotation);
-	
-	m_speed *= 0.99f;
+	return m_velocity;
 }
 
 void Player::draw(sf::RenderWindow& t_window)

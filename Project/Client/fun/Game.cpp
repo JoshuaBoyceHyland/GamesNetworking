@@ -39,7 +39,7 @@ Game::Game() :
 	}
 	
 	// recievinh information about other players
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < initPacket.numOfPlayers; i++)
 	{
 		while (true)
 		{
@@ -140,10 +140,13 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 	
-	m_players[currentPlayer].checkForInput(t_deltaTime.asMilliseconds());
+	
+	sf::Vector2 direction = m_players[currentPlayer].checkForInput(t_deltaTime.asMilliseconds());
 
+	InputPacket inputPacket = { currentPlayer, direction.x, direction.y };
 
-	updateHost();
+	send(m_client.m_server, (char*)&inputPacket, sizeof(inputPacket), 0);
+
 	updatePlayers();
 	m_gameText.update();
 }
@@ -165,19 +168,11 @@ void Game::render()
 	m_window.display();
 }
 
-void Game::updateHost()
-{
-	UpdatePacket outGoingPacket = { currentPlayer, m_players[currentPlayer].m_position.x, m_players[currentPlayer].m_position.y, m_players[currentPlayer].m_rotation, m_players[currentPlayer].m_alive };
-
-	send(m_client.m_server, (char*)&outGoingPacket, sizeof(outGoingPacket), 0);
-}
-
 void Game::updatePlayers()
 {
 	UpdatePacket recievingPacket;
 
-
-	// recievinh information about other players
+	//// recievinh information about other players
 	for (int i = 0; i < 2; i++)
 	{
 		while (true)

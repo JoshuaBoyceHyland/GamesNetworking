@@ -37,6 +37,15 @@ struct CollisionPacket
 
 };
 
+
+struct InputPacket
+{
+	int player;
+	float xDirection;
+	float yDiretion;
+};
+
+
 struct UpdatePacket
 {
 	int player;

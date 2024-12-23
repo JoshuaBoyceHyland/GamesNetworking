@@ -64,10 +64,10 @@ void Host::notifyClientsOfCollision(CollisionPacket t_outGoingPacket)
 	}
 }
 
-std::vector<UpdatePacket> Host::recieveClientData()
+std::vector<InputPacket> Host::recieveClientData()
 {
-	UpdatePacket currentPacket;
-	std::vector<UpdatePacket> incomingPackets;
+	InputPacket currentPacket;
+	std::vector<InputPacket> incomingPackets;
 
 	for (int i = 0; i < m_clients.size(); i++)
 	{

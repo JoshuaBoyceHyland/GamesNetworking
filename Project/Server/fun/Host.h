@@ -39,6 +39,7 @@ struct PlayerInitPacket
 struct CollisionPacket
 {
 	bool wasCollision = false;
+	bool gameOver = false;
 	int player;
 	int playerLifeSpan;
 	float popUpTTL;

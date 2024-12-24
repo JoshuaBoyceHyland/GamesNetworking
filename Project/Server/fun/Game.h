@@ -61,6 +61,16 @@ private:
 	Host m_host;
 
 	/// <summary>
+	/// Players caught so far
+	/// </summary>
+	int m_playersCaught = 0;
+
+	/// <summary>
+	/// Number of players in game
+	/// </summary>
+	int m_numOfPlayers = 3;
+
+	/// <summary>
 	/// Player who is the chaser
 	/// </summary>
 	int m_chaser;

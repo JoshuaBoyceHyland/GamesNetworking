@@ -30,21 +30,34 @@ private:
 	void processKeys(sf::Event t_event);
 	void update(sf::Time t_deltaTime);
 	void render();
-	void updateHost();
+
 	void updatePlayers();
 
 
 	sf::RenderWindow m_window; // main SFML window
 	bool m_exitGame; // control exiting game
 
-	sf::CircleShape circ;
-
 	Client m_client;
 
-	int currentPlayer;
+	/// <summary>
+	/// Player who is the client
+	/// </summary>
+	int m_clientPlayer;
+
+	/// <summary>
+	/// List of all players
+	/// </summary>
 	std::vector<Player> m_players;
+
+	/// <summary>
+	/// Text for the game
+	/// </summary>
 	GameText m_gameText;
-	int numOfPlayers;
+
+	/// <summary>
+	/// Number of players
+	/// </summary>
+	int m_numOfPlayers;
 };
 
 

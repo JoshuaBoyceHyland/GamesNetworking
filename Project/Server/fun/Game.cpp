@@ -25,6 +25,7 @@ Game::Game() :
 	m_chaser = rand() % 3;
 
 	findPlayers();
+
 	m_text.makeText(m_players[m_chaser].m_color + " Player is the chaser", 10);
 }
 
@@ -161,8 +162,8 @@ void Game::findPlayers()
 
 	// player 1 which is the host
 	Color color = Color::Red;
-	m_players.push_back(Player(color, m_spawnLocations[0]));
-	outGoingPackets.push_back({ 0, 0 });
+	m_players.push_back(Player(color, m_spawnLocations[m_hostPlayer]));
+	outGoingPackets.push_back({ m_hostPlayer, int(color) });
 
 
 	// rest of players which are clients
@@ -171,8 +172,8 @@ void Game::findPlayers()
 		color = Color(i);
 		m_host.listenForClient();
 		m_players.push_back(Player(color, m_spawnLocations[i]));
-		m_host.initializeClient(i - 1, { i, 3, m_chaser });
-		outGoingPackets.push_back({ i , i, m_spawnLocations[i].x, m_spawnLocations[i].y });
+		m_host.initializeClient(i - 1, { i, m_numOfPlayers, m_chaser }); // Game initialixation packet
+		outGoingPackets.push_back({ i , int(color), m_spawnLocations[i].x, m_spawnLocations[i].y });
 
 	}
 
@@ -209,19 +210,33 @@ void Game::checkForCollision(std::vector<UpdatePacket> t_updatePackets)
 			{
 				if (m_players[m_chaser].m_body.getGlobalBounds().intersects(m_players[i].m_body.getGlobalBounds()))
 				{
-					
+					m_playersCaught++;
 					m_players[i].m_active = false;
+
 					int timeLived = m_timer.getElapsedTime().asSeconds();
-					std::string str = m_players[i].m_color + " Player " + " lasted: " + std::to_string(timeLived) + " seconds";
-					float TTL = 5;
-					m_text.makeText(str, 5);
+					float TTL;
+					std::string textString;
+
+					if (m_playersCaught == m_numOfPlayers - 1)
+					{
+						possibleCollision.gameOver = true;
+						TTL = 100;
+						textString = "GameOver! " + m_players[i].m_color + " Player " + " lasted: " + std::to_string(timeLived) + " seconds";
+					}
+					else
+					{
+						textString = m_players[i].m_color + " Player " + " lasted: " + std::to_string(timeLived) + " seconds";
+						TTL = 5;
+					}
+
+					m_text.makeText(textString, TTL);
 
 
 					possibleCollision.player = i;
 					possibleCollision.playerLifeSpan = timeLived;
 					possibleCollision.popUpTTL = TTL;
 					possibleCollision.wasCollision = true;
-				
+					
 
 				}
 			}

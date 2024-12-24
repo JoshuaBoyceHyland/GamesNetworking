@@ -1,9 +1,0 @@
-﻿  Game.cpp
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Client - Copy\fun\Game.cpp(133,91): warning C4244: 'argument': conversion from 'sf::Int32' to 'float', possible loss of data
-  GameText.cpp
-  main.cpp
-C:\Users\Joshua\Desktop\GamesNetworking\Project\Client - Copy\fun\main.cpp(33,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Client.cpp
-  Player.cpp
-  Generating Code...
-  fun.vcxproj -> C:\Users\Joshua\Desktop\GamesNetworking\Project\Client - Copy\x64\Debug\fun.exe

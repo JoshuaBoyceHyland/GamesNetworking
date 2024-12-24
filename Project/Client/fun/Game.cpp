@@ -27,8 +27,8 @@ Game::Game() :
 	GameInitPacket initPacket = m_client.recieveGameInitialisation();
 
 	// recieving info about the clients and which player we aree
-	currentPlayer = initPacket.yourPlayer;
-	numOfPlayers = initPacket.numOfPlayers;
+	m_clientPlayer = initPacket.yourPlayer;
+	m_numOfPlayers = initPacket.numOfPlayers;
 	
 
 	PlayerInitPacket playerInitPacket;
@@ -130,9 +130,9 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 	
-	sf::Vector2 direction = m_players[currentPlayer].checkForInput(t_deltaTime.asMilliseconds());
+	sf::Vector2 direction = m_players[m_clientPlayer].checkForInput(t_deltaTime.asMilliseconds());
 
-	m_client.sendClientInput(currentPlayer, direction.x, direction.y);
+	m_client.sendClientInput(m_clientPlayer, direction.x, direction.y);
 
 	updatePlayers();
 	m_gameText.update();
@@ -161,7 +161,7 @@ void Game::updatePlayers()
 	UpdatePacket recievingPacket;
 
 	//// recievinh information about other players
-	for (int i = 0; i < numOfPlayers; i++)
+	for (int i = 0; i < m_numOfPlayers; i++)
 	{
 		recievingPacket = m_client.recievePlayerUpdate();
 
@@ -174,7 +174,17 @@ void Game::updatePlayers()
 	if (possibleCollision.wasCollision)
 	{
 		m_players[possibleCollision.player].m_active = false;
-		std::string str = m_players[possibleCollision.player].m_color + " Player" + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
+		std::string str;
+		
+		if (possibleCollision.gameOver)
+		{
+			str = "GameOver! " + m_players[possibleCollision.player].m_color + " Player" + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
+		}
+		else
+		{
+			str = m_players[possibleCollision.player].m_color + " Player" + " lasted: " + std::to_string(possibleCollision.playerLifeSpan) + " seconds";
+		}
+		
 		m_gameText.makeText(str, possibleCollision.popUpTTL);
 	}
 
